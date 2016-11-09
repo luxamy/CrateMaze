@@ -56,16 +56,12 @@ public class Level
 
     public int GetTile(int x, int y)
     {
-        int tile = 0;
-
-        //TODO: Add GetTile() body
-
-        return tile;
+        return level[x][y];
     }
 
     public void UpdateLevel(int x, int y, int tile)
     {
-        //TODO: Add UpdateLevel() body
+        level[x][y] = tile;
     }
 
     public void SetPlayer(int x, int y)
