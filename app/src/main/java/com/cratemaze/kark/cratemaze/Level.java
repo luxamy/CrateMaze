@@ -1,7 +1,5 @@
 package com.cratemaze.kark.cratemaze;
 
-import android.service.quicksettings.Tile;
-
 enum TILES
 {
     EMPTY(0),
