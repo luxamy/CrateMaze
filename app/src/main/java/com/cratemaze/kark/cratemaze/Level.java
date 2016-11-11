@@ -30,7 +30,7 @@ public class Level
         //TODO: loads level data from a database
 
         //temporary test-levelData:
-        levelData = "111141111100020001100000001100000001100020001100000001100000001100030001111111111";
+        levelData = "111141111100020001100000001100000001100000001100000001100000001100020001111131111";
         success = true;
 
         //fills level Array from levelData string.
@@ -54,7 +54,12 @@ public class Level
 
     public int GetTile(int x, int y)
     {
-        return level[x][y];
+        int ret = -1;
+        if(x >= 0 && x <= 8 && y >= 0 && y <= 8)
+        {
+            ret = level[x][y];
+        }
+        return ret;
     }
 
     public void UpdateLevel(int x, int y, int tile)

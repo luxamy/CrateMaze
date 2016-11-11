@@ -145,16 +145,8 @@
         android:rotation="180"
         android:layout_alignBottom="@+id/field5x9"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/direction"
-        android:id="@+id/bUp"
-        tools:srcCompat="@mipmap/direction"
-        android:layout_above="@+id/field5x8"
-        android:layout_alignStart="@+id/bDown" />
+        android:layout_marginStart="30dp"
+        android:background="@android:drawable/list_selector_background" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -164,16 +156,8 @@
         android:rotation="90"
         android:layout_alignBottom="@+id/field5x9"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="28dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/direction"
-        android:id="@+id/bLeft"
-        android:rotation="270"
-        android:layout_above="@+id/field5x8"
-        android:layout_alignStart="@+id/bRight" />
+        android:layout_marginEnd="28dp"
+        android:background="@android:drawable/list_selector_background" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -702,4 +686,25 @@
         android:id="@+id/field6x8"
         android:layout_below="@+id/field5x7"
         android:layout_toEndOf="@+id/field5x7" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/direction"
+        android:id="@+id/bLeft"
+        android:rotation="270"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_above="@+id/field9x8"
+        android:layout_alignStart="@+id/bRight"
+        android:layout_marginBottom="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/direction"
+        android:id="@+id/bUp"
+        tools:srcCompat="@mipmap/direction"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_alignTop="@+id/bLeft"
+        android:layout_alignStart="@+id/bDown" />
 </RelativeLayout>
