@@ -9,14 +9,10 @@ import android.content.pm.ActivityInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
-    private String usernameString;
-    private String passwordString;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -26,15 +22,14 @@ public class MainActivity extends Activity implements View.OnClickListener
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
 
-        final TextView usernameText = (TextView) findViewById(R.id.usernameText);
-        final TextView passwordText = (TextView) findViewById(R.id.passwordText);
-
         final Button login = (Button) findViewById(R.id.login);
         final Button register = (Button) findViewById(R.id.register);
+        final Button exit = (Button) findViewById(R.id.exit);
 
         titel.setImageResource(R.mipmap.logo);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+        exit.setOnClickListener(this);
     }
 
     @Override
@@ -48,12 +43,15 @@ public class MainActivity extends Activity implements View.OnClickListener
             case R.id.login:
                 if(username.getText().toString().equals("rk") && password.getText().toString().equals("rk"))
                 {
-                    Intent i = new Intent(this, GameActivity.class);
+                    Intent i = new Intent(this, MenuActivity.class);
+                    Log.e("Test", "Test");
                     this.startActivity(i);
+                    Log.e("Test", "Test2");
                 }
                 break;
-            default:
-                Toast.makeText(this, "test3", Toast.LENGTH_SHORT).show();
+
+            case R.id.exit:
+                finish();
                 break;
 
             case R.id.password:

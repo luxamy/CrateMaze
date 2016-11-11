@@ -1,6 +1,7 @@
 package com.cratemaze.kark.cratemaze;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +22,6 @@ public class MenuActivity extends Activity implements View.OnClickListener
 
         final Button highscore = (Button) findViewById(R.id.highscore);
         final Button logout = (Button) findViewById(R.id.logout);
-        final Button exit = (Button) findViewById(R.id.exit);
 
         final ImageButton singlePlayer = (ImageButton) findViewById(R.id.single);
         final ImageButton twoPlayer = (ImageButton) findViewById(R.id.twoplayer);
@@ -29,9 +29,12 @@ public class MenuActivity extends Activity implements View.OnClickListener
 
 
         titel.setImageResource(R.mipmap.logo);
+        singlePlayer.setImageResource(R.mipmap.one_player);
+        twoPlayer.setImageResource(R.mipmap.two_player_one);
+        wifiPlayer.setImageResource(R.mipmap.two_player);
+
         highscore.setOnClickListener(this);
         logout.setOnClickListener(this);
-        exit.setOnClickListener(this);
         singlePlayer.setOnClickListener(this);
         twoPlayer.setOnClickListener(this);
         wifiPlayer.setOnClickListener(this);
@@ -40,6 +43,21 @@ public class MenuActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
-
+        switch (view.getId())
+        {
+            case R.id.highscore:
+                break;
+            case R.id.logout:
+                finish();
+                break;
+            case R.id.single:
+                Intent i = new Intent(this, GameActivity.class);
+                this.startActivity(i);
+                break;
+            case R.id.twoplayer:
+                break;
+            case R.id.wifi:
+                break;
+        }
     }
 }
