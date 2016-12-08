@@ -51,7 +51,7 @@ public class MenuActivity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.single:
-                Intent i = new Intent(this, GameActivity.class);
+                Intent i = new Intent(this, SelectionActivity.class);
                 this.startActivity(i);
                 break;
             case R.id.twoplayer:
