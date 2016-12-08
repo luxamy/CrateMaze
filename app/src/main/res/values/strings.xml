@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">CrateMaze</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="b1">1</string>
+    <string name="b2">2</string>
+    <string name="b3">3</string>
+    <string name="b4">4</string>
+    <string name="b5">5</string>
+    <string name="back">back</string>
 </resources>
