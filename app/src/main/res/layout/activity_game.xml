@@ -707,4 +707,12 @@
         android:background="@android:drawable/list_selector_background"
         android:layout_alignTop="@+id/bLeft"
         android:layout_alignStart="@+id/bDown" />
+
+    <TextView
+        android:text="@string/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/timer" />
 </RelativeLayout>

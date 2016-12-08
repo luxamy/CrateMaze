@@ -6,16 +6,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivity extends Activity implements View.OnClickListener
 {
+    private int time;
+    private boolean startTime;
     private Level level = new Level();
     private final ImageView field[][] = new ImageView[9][9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        time = 0;
+        startTime = true;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -64,6 +74,23 @@ public class GameActivity extends Activity implements View.OnClickListener
                 break;
         }
         DrawLevel();
+        if(startTime)
+        {
+            startTime = false;
+            Timer timer = new Timer(true);
+            TimerTask task = new TimerTask()
+            {
+                @Override
+                public void run()
+                {
+                    time++;
+                    final TextView tvTimer = (TextView) findViewById(R.id.timer);
+                    tvTimer.setText(time);
+                }
+            };
+            timer.scheduleAtFixedRate(task, 0, 1000*60);
+        }
+
     }
 
     private void DrawLevel()
