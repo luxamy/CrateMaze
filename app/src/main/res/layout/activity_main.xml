@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <TextView
         android:text="username"
@@ -58,7 +59,9 @@
         android:layout_alignBaseline="@+id/login"
         android:layout_alignBottom="@+id/login"
         android:layout_toEndOf="@+id/login"
-        android:layout_marginStart="69dp" />
+        android:layout_marginStart="69dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@color/background_floating_material_light" />
 
     <Button
         android:text="Login"
@@ -68,14 +71,18 @@
         android:layout_marginStart="116dp"
         android:layout_below="@+id/password"
         android:layout_alignStart="@+id/passwordText"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@color/background_floating_material_light" />
 
     <Button
+        android:text="exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="exit"
         android:id="@+id/exit"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/background_floating_material_light" />
 
 </RelativeLayout>

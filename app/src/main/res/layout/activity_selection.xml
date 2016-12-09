@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/button_material_light">
 
     <Button
         android:text="@string/b3"
@@ -10,7 +11,8 @@
         android:id="@+id/bLevel3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="27dp"
+        android:background="@android:color/holo_orange_dark"/>
 
     <Button
         android:text="@string/b2"
@@ -20,7 +22,8 @@
         android:layout_marginEnd="38dp"
         android:layout_alignBaseline="@+id/bLevel3"
         android:layout_alignBottom="@+id/bLevel3"
-        android:layout_toStartOf="@+id/bLevel3" />
+        android:layout_toStartOf="@+id/bLevel3"
+        android:background="@android:color/holo_orange_dark" />
 
     <Button
         android:text="@string/b1"
@@ -30,7 +33,8 @@
         android:layout_alignBaseline="@+id/bLevel2"
         android:layout_alignBottom="@+id/bLevel2"
         android:layout_toStartOf="@+id/bLevel2"
-        android:layout_marginEnd="33dp" />
+        android:layout_marginEnd="33dp"
+        android:background="@android:color/holo_orange_dark" />
 
     <Button
         android:text="@string/b5"
@@ -40,7 +44,8 @@
         android:layout_marginStart="36dp"
         android:layout_alignBaseline="@+id/bLevel4"
         android:layout_alignBottom="@+id/bLevel4"
-        android:layout_toEndOf="@+id/bLevel4" />
+        android:layout_toEndOf="@+id/bLevel4"
+        android:background="@android:color/holo_orange_dark" />
 
     <Button
         android:text="@string/back"
@@ -49,7 +54,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:id="@+id/bBack" />
+        android:id="@+id/bBack"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/background_floating_material_light" />
 
     <Button
         android:text="@string/b4"
@@ -59,5 +66,6 @@
         android:layout_marginStart="18dp"
         android:layout_alignBaseline="@+id/bLevel3"
         android:layout_alignBottom="@+id/bLevel3"
-        android:layout_toEndOf="@+id/bBack" />
+        android:layout_toEndOf="@+id/bBack"
+        android:background="@android:color/holo_orange_dark"/>
 </RelativeLayout>
