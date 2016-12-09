@@ -2,32 +2,21 @@ package com.cratemaze.kark.cratemaze;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.content.pm.ActivityInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
-    private GoogleApiClient client;
-    DatabaseManager dbmgr;
-    SQLiteDatabase sqldb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-        //dbmgr = new DatabaseManager(this);
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
 
