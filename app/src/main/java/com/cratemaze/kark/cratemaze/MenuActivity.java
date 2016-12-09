@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 public class MenuActivity extends Activity implements View.OnClickListener
 {
+    private static final int REQUEST_CODE = 2;
+    private int playerId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -27,6 +30,8 @@ public class MenuActivity extends Activity implements View.OnClickListener
         final ImageButton twoPlayer = (ImageButton) findViewById(R.id.twoplayer);
         final ImageButton wifiPlayer = (ImageButton) findViewById(R.id.wifi);
 
+        Bundle extras = getIntent().getExtras();
+        playerId = extras.getInt("id");
 
         titel.setImageResource(R.mipmap.logo);
         singlePlayer.setImageResource(R.mipmap.one_player);
@@ -52,7 +57,8 @@ public class MenuActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.single:
                 Intent i = new Intent(this, SelectionActivity.class);
-                this.startActivity(i);
+                i.putExtra("id", playerId);
+                startActivityForResult(i, REQUEST_CODE);
                 break;
             case R.id.twoplayer:
                 break;

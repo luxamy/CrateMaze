@@ -1,6 +1,7 @@
 package com.cratemaze.kark.cratemaze;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -43,13 +44,12 @@ public class GameActivity extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        time = 0;
-        startTime = true;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        time = 0;
+        startTime = true;
         initFieldArray();
 
         final ImageButton bDown = (ImageButton) findViewById(R.id.bDown);
@@ -67,8 +67,13 @@ public class GameActivity extends Activity implements View.OnClickListener
         bRight.setOnClickListener(this);
         bLeft.setOnClickListener(this);
 
-        level.LoadLevel(0);
-
+        Bundle extras = getIntent().getExtras();
+        int id = extras.getInt("id");
+        if (!level.LoadLevel(id))
+        {
+            Toast.makeText(this, "Couldn't Load Level!", Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(this, new String().valueOf(id), Toast.LENGTH_SHORT).show();
         DrawLevel();
     }
 
@@ -246,7 +251,10 @@ public class GameActivity extends Activity implements View.OnClickListener
         {
             level.SetPlayer(level.getPlayerX() + x, level.getPlayerY() + y);
             Toast.makeText(this, "You Won!", Toast.LENGTH_SHORT).show();
-            finish();
+            Intent data = new Intent();
+            data.putExtra("time", time);
+            setResult(RESULT_OK, data);
+            super.finish();
         }
     }
 }

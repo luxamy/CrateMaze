@@ -14,8 +14,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
-    DatabaseManager dbmgr;
-    SQLiteDatabase sqldb;
+    private static final int REQUEST_CODE = 1;
+    private DatabaseManager dbmgr;
+    private SQLiteDatabase sqldb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,10 +51,12 @@ public class MainActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.login:
+                int playerId = 1; //get that from the database
                 if(username.getText().toString().equals("rk") && password.getText().toString().equals("rk"))
                 {
                     Intent i = new Intent(this, MenuActivity.class);
-                    this.startActivity(i);
+                    i.putExtra("id", playerId);
+                    startActivityForResult(i, REQUEST_CODE);
                 }
                 break;
 

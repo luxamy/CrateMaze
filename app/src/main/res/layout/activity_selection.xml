@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-        android:background="@android:color/holo_orange_dark"/>
+        android:background="@color/crate_maze_orange"/>
 
     <Button
         android:text="@string/b2"
@@ -23,7 +23,7 @@
         android:layout_alignBaseline="@+id/bLevel3"
         android:layout_alignBottom="@+id/bLevel3"
         android:layout_toStartOf="@+id/bLevel3"
-        android:background="@android:color/holo_orange_dark" />
+        android:background="@color/crate_maze_orange" />
 
     <Button
         android:text="@string/b1"
@@ -34,7 +34,7 @@
         android:layout_alignBottom="@+id/bLevel2"
         android:layout_toStartOf="@+id/bLevel2"
         android:layout_marginEnd="33dp"
-        android:background="@android:color/holo_orange_dark" />
+        android:background="@color/crate_maze_orange" />
 
     <Button
         android:text="@string/b5"
@@ -45,7 +45,7 @@
         android:layout_alignBaseline="@+id/bLevel4"
         android:layout_alignBottom="@+id/bLevel4"
         android:layout_toEndOf="@+id/bLevel4"
-        android:background="@android:color/holo_orange_dark" />
+        android:background="@color/crate_maze_orange" />
 
     <Button
         android:text="@string/back"
@@ -67,5 +67,5 @@
         android:layout_alignBaseline="@+id/bLevel3"
         android:layout_alignBottom="@+id/bLevel3"
         android:layout_toEndOf="@+id/bBack"
-        android:background="@android:color/holo_orange_dark"/>
+        android:background="@color/crate_maze_orange"/>
 </RelativeLayout>
