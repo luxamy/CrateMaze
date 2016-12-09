@@ -8,4 +8,5 @@
     <string name="b4">4</string>
     <string name="b5">5</string>
     <string name="back">back</string>
+    <string name="timer">0</string>
 </resources>
