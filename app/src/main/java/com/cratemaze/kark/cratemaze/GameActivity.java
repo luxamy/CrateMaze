@@ -20,6 +20,26 @@ public class GameActivity extends Activity implements View.OnClickListener
     private Level level = new Level();
     private final ImageView field[][] = new ImageView[9][9];
 
+    private Timer timer = new Timer(true);
+    private TimerTask task = new TimerTask()
+    {
+
+        @Override
+        public void run()
+        {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    time++;
+                    String sTime = "";
+                    final TextView tvTimer = (TextView) findViewById(R.id.timer);
+                    tvTimer.setText(sTime.valueOf(time));
+                }
+            });
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -74,21 +94,11 @@ public class GameActivity extends Activity implements View.OnClickListener
                 break;
         }
         DrawLevel();
+
         if(startTime)
         {
             startTime = false;
-            Timer timer = new Timer(true);
-            TimerTask task = new TimerTask()
-            {
-                @Override
-                public void run()
-                {
-                    time++;
-                    final TextView tvTimer = (TextView) findViewById(R.id.timer);
-                    tvTimer.setText(time);
-                }
-            };
-            timer.scheduleAtFixedRate(task, 0, 1000*60);
+            timer.scheduleAtFixedRate(task, new Date(), 1000);
         }
 
     }
