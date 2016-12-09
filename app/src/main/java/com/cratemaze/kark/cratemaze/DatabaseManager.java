@@ -16,8 +16,10 @@ public class DatabaseManager extends SQLiteOpenHelper
     private SQLiteDatabase sqldb;
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "Crate_Maze_db";
-    private static final String DB_TABLE = "game_data";
-    public static final String CLASS_SELECT_RAW = "SELECT * FROM" + DatabaseManager.DB_TABLE;
+    private static final String TABLE_PLAYER = "player";
+    private static final String TABLE_LEVEL = "level";
+    public static final String CLASS_SELECT_RAW_PLAYER = "SELECT * FROM" + DatabaseManager.TABLE_PLAYER;
+    public static final String CLASS_SELECT_RAW_LEVEL = "SELECT * FROM" + DatabaseManager.TABLE_LEVEL;
 
     //Fields DB Level
     private static final String LEVEL_ID = "_id";
@@ -34,16 +36,16 @@ public class DatabaseManager extends SQLiteOpenHelper
     private String[] columsLevel = {CONTENT, TIME, HIGHSCORE};
     private String[] columsPlayer = {NAME, PW, CURRENT};
 
-    Cursor cursorLevel = sqldb.query(DB_TABLE, columsLevel, null, null, null, null, null);
-    Cursor cursorPlayer = sqldb.query(DB_TABLE, columsPlayer, null, null, null, null, null);
+    Cursor cursorLevel = sqldb.query(TABLE_LEVEL, columsLevel, null, null, null, null, null);
+    Cursor cursorPlayer = sqldb.query(TABLE_PLAYER, columsPlayer, null, null, null, null, null);
 
     public void onCreate(SQLiteDatabase sqldb)
     {
-        String Player = "CREATE TABLE" + DB_TABLE + "(" + PLAYER_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," + NAME +
+        String Player = "CREATE TABLE" + TABLE_PLAYER + "(" + PLAYER_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," + NAME +
                 "VARCHAR NOT NULL," +PW + "VARCHAR NOT NULL" + CURRENT + "INTEGER);";
         sqldb.execSQL(Player);
 
-        String Level = "CREATE TABLE" + DB_TABLE + "(" + LEVEL_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," + CONTENT +
+        String Level = "CREATE TABLE" + TABLE_LEVEL + "(" + LEVEL_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," + CONTENT +
                 "CHAR(81)," + TIME + "INTEGER," + HIGHSCORE + "INTEGER);";
         sqldb.execSQL(Level);
 
@@ -64,29 +66,40 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqldb = getWritableDatabase();
     }
 
-    public long insertRecord(String key, String value)
+    public long insertRecord(String table_name, String key, String value)
     {
-        String[] keyPlayer = new String[4];
-        keyPlayer[0]=PLAYER_ID;
-        keyPlayer[1]=NAME;
-        keyPlayer[2]=PW;
-        keyPlayer[3]=CURRENT;
+        long rowId=0;
+        if (table_name.equals(TABLE_PLAYER))
+        {
+            ContentValues cv = new ContentValues();
+            cv.put(key, value);
+            rowId = sqldb.insert(TABLE_PLAYER, null, cv);
+        }
 
-        int i = 1;
-
-        ContentValues cv = new ContentValues();
-        cv.put(keyPlayer[i], value);
-        long rowId = sqldb.insert(DB_TABLE, null, cv);
+        else if(table_name.equals(TABLE_LEVEL))
+        {
+            ContentValues cv = new ContentValues();
+            cv.put(key, value);
+            rowId = sqldb.insert(TABLE_LEVEL, null, cv);
+        }
         return rowId;
     }
 
-    public void ausgabe(String mInhalt)
+    public void ausgabe(String table_name, String mInhalt)
     {
-        while (cursorLevel.moveToNext())
+        if(table_name.equals(TABLE_LEVEL))
         {
-            mInhalt += cursorLevel.getString(1) + " " + cursorLevel.getString(2) + " " + cursorLevel.getString(3) + "\n";
-
-
+            while (cursorLevel.moveToNext())
+            {
+                mInhalt += cursorLevel.getString(1) + " " + cursorLevel.getString(2) + " " + cursorLevel.getString(3) + "\n";
+            }
+        }
+        else if (table_name.equals(TABLE_PLAYER))
+        {
+            while (cursorPlayer.moveToNext())
+            {
+                mInhalt += cursorPlayer.getString(1) + " " + cursorPlayer.getString(2) + " " + cursorPlayer.getString(3) + "\n";
+            }
         }
     }
 }
