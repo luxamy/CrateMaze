@@ -2,21 +2,32 @@ package com.cratemaze.kark.cratemaze;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.content.pm.ActivityInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
+    DatabaseManager dbmgr;
+    SQLiteDatabase sqldb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        dbmgr = new DatabaseManager(this);
+
+        dbmgr.insertRecord("level", "content", "111141111100020001100000001100000001100000001100000001100000001100020001111131111" /*false*/); // Level 1
+        //TODO: Add other Levels (alle mit wait == false)
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
 
@@ -50,8 +61,29 @@ public class MainActivity extends Activity implements View.OnClickListener
                 finish();
                 break;
 
-            case R.id.password:
+            case R.id.register:
+                dbmgr.insertRecord("player", "name", username.getText().toString() /*true*/);
+                dbmgr.insertRecord("player", "password", password.getText().toString() /*false*/);
+                String msg = "You are registered!";
+                Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        dbmgr.close();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        sqldb = dbmgr.getReadableDatabase();
+
+        Cursor levelCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_LEVEL, null);
+        Cursor playerCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_PLAYER, null);
     }
 }
