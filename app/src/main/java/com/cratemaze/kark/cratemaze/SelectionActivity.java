@@ -3,6 +3,8 @@ package com.cratemaze.kark.cratemaze;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,9 @@ public class SelectionActivity extends Activity implements View.OnClickListener
     private int playedLevel;
     private int mode;
 
+    private DatabaseManager dbmgr;
+    private SQLiteDatabase sqldb;
+
     final Button[] bLevels = new Button[levelCount];
 
     @Override
@@ -29,10 +34,9 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
         int playerId = extras.getInt("id");
-        //TODO: get currentLevel from player in DB
 
-        //temporary
-        curLevel = 1;
+        dbmgr = new DatabaseManager(this);
+        curLevel = Integer.valueOf(dbmgr.ausgabe("player", "currentLevel", playerId));
 
         bLevels[0] = (Button) findViewById(R.id.bLevel1);
         bLevels[1] = (Button) findViewById(R.id.bLevel2);
@@ -105,12 +109,34 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         {
             if(data.hasExtra("time"))
             {
-                //TODO: compare result time with current highscore time and write into database if better.
+                Bundle b = data.getExtras();
+                if(b.getInt("time") > Integer.valueOf(dbmgr.ausgabe("level", "time", playedLevel)))
+                {
+                    dbmgr.updateRecord("level", "time", playedLevel, b.getString("time"));
+                    Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+                }
                 curLevel++;
                 bLevels[curLevel - 1].setOnClickListener(this);
                 bLevels[curLevel - 1].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
                 Toast.makeText(this, new String().valueOf(data.getExtras().getInt("time")), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        dbmgr.close();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        sqldb = dbmgr.getReadableDatabase();
+
+        Cursor levelCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_LEVEL, null);
+        Cursor playerCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_PLAYER, null);
     }
 }

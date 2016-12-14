@@ -22,16 +22,11 @@ public class Level
 
     public Level() {}
 
-    public boolean LoadLevel(int id)
+    public boolean LoadLevel( String levelData)
     {
         boolean success = false;
-        String levelData;
 
-        //TODO: loads level data from a database
-
-        //temporary test-levelData:
-        levelData = "111141111100020001100000001100000001100000001100000001100000001100020001111131111";
-        success = true;
+        if(levelData.length() == 81) success = true;
 
         //fills level Array from levelData string.
         for (int i = 0; i < xSize; i++)

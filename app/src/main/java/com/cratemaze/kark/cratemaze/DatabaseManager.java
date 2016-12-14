@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by kathiA on 11.11.2016.
@@ -21,7 +24,7 @@ public class DatabaseManager extends SQLiteOpenHelper
     public static final String CLASS_SELECT_RAW_PLAYER = "SELECT * FROM " + DatabaseManager.TABLE_PLAYER;
     public static final String CLASS_SELECT_RAW_LEVEL = "SELECT * FROM " + DatabaseManager.TABLE_LEVEL;
 
-    private ContentValues cv;
+    private ContentValues cv = new ContentValues();
 
     //Fields DB Level
     private static final String LEVEL_ID = "_id";
@@ -67,12 +70,43 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqldb = getWritableDatabase();
     }
 
+    public boolean updateRecord(String table_name, String attribute, int id, String newValue)
+    {
+        SQLiteStatement sqlstm = null;
+        boolean successCheck = true;
+
+        try
+        {
+            sqlstm = sqldb.compileStatement("UPDATE " + table_name + " SET " + attribute + " = " + newValue + "WHERE _id=" + id + ";");
+            sqlstm.execute();
+        }
+        catch (SQLiteException ex)
+        {
+            ex.printStackTrace();
+            successCheck = false;
+        }
+        finally
+        {
+            try
+            {
+                sqlstm.close();
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                successCheck = false;
+            }
+        }
+
+        return successCheck;
+    }
+
     public long insertRecord(String table_name, String key, String value, boolean wait)
     {
         long rowId=0;
         cv.put(key, value);
 
-        if(wait==false)
+        if(!wait)
         {
 
             if (table_name.equals(TABLE_PLAYER))
@@ -88,8 +122,60 @@ public class DatabaseManager extends SQLiteOpenHelper
         return rowId;
     }
 
+    public boolean removeRecord(String table_name, int id)
+    {
+        String cmd = "DELETE FROM " + table_name;
+        if(id >= 0) cmd += " WHERE _id=" + id + ";";
+
+        SQLiteStatement sqlstm = null;
+        boolean successCheck = true;
+        try
+        {
+            sqlstm = sqldb.compileStatement(cmd);
+            sqlstm.execute();
+        }
+        catch (SQLiteException ex)
+        {
+            ex.printStackTrace();
+            successCheck = false;
+        }
+        finally
+        {
+            try
+            {
+                sqlstm.close();
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                successCheck = false;
+            }
+        }
+
+        return successCheck;
+    }
+
+    public int getCount(String table_name)
+    {
+        int ret = -1;
+        Cursor cursorLevel = sqldb.query(TABLE_LEVEL, columsLevel, null, null, null, null, null);
+        Cursor cursorPlayer = sqldb.query(TABLE_PLAYER, columsPlayer, null, null, null, null, null);
+
+        if(table_name.equals(TABLE_LEVEL))
+        {
+            ret = cursorLevel.getCount();
+        }
+        else if (table_name.equals(TABLE_PLAYER))
+        {
+            ret = cursorPlayer.getCount();
+        }
+
+        return ret;
+    }
+
     public String ausgabe(String table_name, String attribute, int id)
     {
+        String ret = "";
         Cursor cursorLevel = sqldb.query(TABLE_LEVEL, columsLevel, null, null, null, null, null);
         Cursor cursorPlayer = sqldb.query(TABLE_PLAYER, columsPlayer, null, null, null, null, null);
 
@@ -100,13 +186,13 @@ public class DatabaseManager extends SQLiteOpenHelper
                switch (attribute)
                {
                    case CONTENT:
-                       cursorLevel.getString(1);
+                       ret = cursorLevel.getString(1);
                        break;
                    case TIME:
-                       cursorLevel.getString(2);
+                       ret = cursorLevel.getString(2);
                        break;
                    case HIGHSCORE:
-                       cursorLevel.getString(3);
+                       ret = cursorLevel.getString(3);
                        break;
                }
             }
@@ -118,16 +204,16 @@ public class DatabaseManager extends SQLiteOpenHelper
                 switch (attribute)
                 {
                     case NAME:
-                        cursorPlayer.getString(1);
+                        ret = cursorPlayer.getString(1);
                         break;
                     case PW:
-                        cursorPlayer.getString(2);
+                        ret =  cursorPlayer.getString(2);
                         break;
                     case CURRENT:
-                        cursorPlayer.getString(3);
+                        ret = cursorPlayer.getString(3);
                         break;
             }
         }
-        return attribute;
+        return ret;
     }
 }

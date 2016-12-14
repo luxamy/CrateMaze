@@ -3,6 +3,8 @@ package com.cratemaze.kark.cratemaze;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,10 +21,13 @@ public class GameActivity extends Activity implements View.OnClickListener
     private int player1Time;
     private int time;
     private int mode;
-    private int levelId;
+    private String levelData;
     private boolean startTime;
     private Level level = new Level();
     private final ImageView field[][] = new ImageView[9][9];
+
+    private DatabaseManager dbmgr;
+    private SQLiteDatabase sqldb;
 
     private Timer timer = new Timer(true);
     private TimerTask task = new TimerTask()
@@ -51,6 +56,8 @@ public class GameActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        dbmgr = new DatabaseManager(this);
+
         time = 0;
         player1Time = 0;
         startTime = true;
@@ -73,8 +80,10 @@ public class GameActivity extends Activity implements View.OnClickListener
 
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
-        levelId = extras.getInt("id");
-        if (!level.LoadLevel(levelId))
+        int levelId = extras.getInt("id");
+        levelData = dbmgr.ausgabe("level", "content", levelId);
+
+        if (!level.LoadLevel(levelData))
         {
             Toast.makeText(this, "Couldn't Load Level!", Toast.LENGTH_SHORT).show();
         }
@@ -294,7 +303,7 @@ public class GameActivity extends Activity implements View.OnClickListener
                 time = 0;
                 startTime = true;
                 Level player2Level = new Level();
-                if(player2Level.LoadLevel(levelId))
+                if(player2Level.LoadLevel(levelData))
                 {
                     level = player2Level;
                     Toast.makeText(this, "Player 2s Turn!", Toast.LENGTH_SHORT).show();
@@ -317,5 +326,22 @@ public class GameActivity extends Activity implements View.OnClickListener
                 finish();
             }
         }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        dbmgr.close();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        sqldb = dbmgr.getReadableDatabase();
+
+        Cursor levelCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_LEVEL, null);
+        Cursor playerCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_PLAYER, null);
     }
 }

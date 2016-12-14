@@ -57,37 +57,40 @@ public class MainActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.login:
-                int playercount = 1;
+                int playerCount = dbmgr.getCount("player");
+                Toast.makeText(this, "Count: " + playerCount, Toast.LENGTH_SHORT).show();
                 String sUsername = username.getText().toString();
                 String sPassword = password.getText().toString();
 
                 int n;
-                boolean found = false;
-                for(n = 0; n < playercount; n++)
+                for(n = 0; n < playerCount; n++)
                 {
-                    if(dbmgr.ausgabe("player", "name", n) == sUsername)
+                    String dbUsername = dbmgr.ausgabe("player", "name", n);
+                    String dbPassword = dbmgr.ausgabe("player", "password", n);
+                    if(dbUsername.equals(sUsername))
                     {
-                        found = true;
+                        if(dbPassword.equals(sPassword))
+                        {
+                            Intent i = new Intent(this, MenuActivity.class);
+                            i.putExtra("id", n);
+                            startActivityForResult(i, REQUEST_CODE);
+                        }
                         break;
                     }
                 }
-                if(dbmgr.ausgabe("player", "password", n) == sPassword && found)
-                {
-                    Intent i = new Intent(this, MenuActivity.class);
-                    i.putExtra("id", n);
-                    startActivityForResult(i, REQUEST_CODE);
-                }
+
                 break;
 
             case R.id.exit:
+                dbmgr.removeRecord("player", -1);
                 finish();
                 break;
 
             case R.id.register:
                 dbmgr.insertRecord("player", "name", username.getText().toString(), true);
-                dbmgr.insertRecord("player", "password", password.getText().toString(), false);
-                String msg = "You are registered!";
-                Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
+                dbmgr.insertRecord("player", "password", password.getText().toString(), true);
+                dbmgr.insertRecord("player", "currentLevel", "1", false);
+                Toast.makeText(this, "You are registered!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
