@@ -43,8 +43,11 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         int i;
         for(i = 0; i < curLevel; i++)
         {
-            bLevels[i].setOnClickListener(this);
-            bLevels[i].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
+            if(curLevel < levelCount)
+            {
+                bLevels[i].setOnClickListener(this);
+                bLevels[i].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
+            }
         }
         int n = i;
         for(i = n; i < levelCount; i++)

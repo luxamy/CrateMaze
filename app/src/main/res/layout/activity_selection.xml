@@ -26,17 +26,6 @@
         android:background="@color/crate_maze_orange" />
 
     <Button
-        android:text="@string/b1"
-        android:layout_width="44dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/bLevel1"
-        android:layout_alignBaseline="@+id/bLevel2"
-        android:layout_alignBottom="@+id/bLevel2"
-        android:layout_toStartOf="@+id/bLevel2"
-        android:layout_marginEnd="33dp"
-        android:background="@color/crate_maze_orange" />
-
-    <Button
         android:text="@string/b5"
         android:layout_width="44dp"
         android:layout_height="wrap_content"
@@ -68,4 +57,15 @@
         android:layout_alignBottom="@+id/bLevel3"
         android:layout_toEndOf="@+id/bBack"
         android:background="@color/crate_maze_orange"/>
+
+    <Button
+        android:text="@string/b1"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel1"
+        android:layout_marginEnd="33dp"
+        android:background="@color/crate_maze_orange"
+        android:layout_alignBaseline="@+id/bLevel2"
+        android:layout_alignBottom="@+id/bLevel2"
+        android:layout_toStartOf="@+id/bLevel2" />
 </RelativeLayout>
