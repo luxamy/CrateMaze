@@ -28,13 +28,13 @@ public class MainActivity extends Activity implements View.OnClickListener
         dbmgr = new DatabaseManager(this);
 
         dbmgr.insertRecord("level", "content", "111141111100020001100000001100000001100000001100000001100000001100020001111131111", false); // Level 1
-        dbmgr.insertRecord("level", "content", "111141111111101111110002011112020011110222011110000011112020211111101111111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111100002001100002001111111101110000201102000001101111111100000001111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111111100111120000201102101001100121001100101201100101021100000001111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111110020011100002201122110001100000001100000001111222111111000111111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111111200011110000211110100011110202011112111011110111211110000011111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111100200201100011001100201001111020001100002201102111001100202021111131111", false);
-        dbmgr.insertRecord("level", "content", "111141111100000001101111001101111101120011101100011101101000001111021001111131111", false);
+        dbmgr.insertRecord("level", "content", "111141111111101111110002011112020011110222011110000011112020211111101111111131111", false); // Level 2
+        dbmgr.insertRecord("level", "content", "111141111100002001100002001111111101110000201102000001101111111100000001111131111", false); // Level 3
+        dbmgr.insertRecord("level", "content", "111141111111100111120000201102101001100121001100101201100101021100000001111131111", false); // Level 4
+        dbmgr.insertRecord("level", "content", "111141111110020011100002201122110001100000001100000001111222111111000111111131111", false); // Level 5
+        dbmgr.insertRecord("level", "content", "111141111111200011110000211110100011110202011112111011110111211110000011111131111", false); // Level 6
+        dbmgr.insertRecord("level", "content", "111141111100200201100011001100201001111020001100002201102111001100202021111131111", false); // Level 7
+        dbmgr.insertRecord("level", "content", "111141111100000001101111001101111101120011101100011101101000001111021001111131111", false); // Level 8
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
 
@@ -57,11 +57,24 @@ public class MainActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.login:
-                int playerId = 1; //get that from the database
-                if(username.getText().toString().equals("rk") && password.getText().toString().equals("rk"))
+                int playercount = 1;
+                String sUsername = username.getText().toString();
+                String sPassword = password.getText().toString();
+
+                int n;
+                boolean found = false;
+                for(n = 0; n < playercount; n++)
+                {
+                    if(dbmgr.ausgabe("player", "name", n) == sUsername)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if(dbmgr.ausgabe("player", "password", n) == sPassword && found)
                 {
                     Intent i = new Intent(this, MenuActivity.class);
-                    i.putExtra("id", playerId);
+                    i.putExtra("id", n);
                     startActivityForResult(i, REQUEST_CODE);
                 }
                 break;
