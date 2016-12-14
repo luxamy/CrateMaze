@@ -21,6 +21,8 @@ public class DatabaseManager extends SQLiteOpenHelper
     public static final String CLASS_SELECT_RAW_PLAYER = "SELECT * FROM " + DatabaseManager.TABLE_PLAYER;
     public static final String CLASS_SELECT_RAW_LEVEL = "SELECT * FROM " + DatabaseManager.TABLE_LEVEL;
 
+    private ContentValues cv;
+
     //Fields DB Level
     private static final String LEVEL_ID = "_id";
     private static final String CONTENT = "content";
@@ -65,60 +67,67 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqldb = getWritableDatabase();
     }
 
-    /*TODO: weiteren Parameter 'boolean wait' hinzufügen
-        ContentValues cv = new ContentValues(); soll aus der funktion rausgenommen werden und als Private definiert werden (oben wo auch andere variablen definiert sind)
-        wenn der parameter wait == true ist soll NUR long rowId=0; und cv.put(key, value); ausgeführt werden.
-        wenn der parameter wait == false ist soll zusätzlich der restliche code und am ende cv.clear() ausgeführt werden.
-
-        In MainActivity.java bei den insertRecord aufrufen bitte die kommentare entfernen und entweder true oder false einfügen.
-    */
-    public long insertRecord(String table_name, String key, String value)
+    public long insertRecord(String table_name, String key, String value, boolean wait)
     {
         long rowId=0;
-        ContentValues cv = new ContentValues();
         cv.put(key, value);
 
-        if (table_name.equals(TABLE_PLAYER))
+        if(wait==false)
         {
-            rowId = sqldb.insert(TABLE_PLAYER, null, cv);
-        }
 
-        else if(table_name.equals(TABLE_LEVEL))
-        {
-            rowId = sqldb.insert(TABLE_LEVEL, null, cv);
+            if (table_name.equals(TABLE_PLAYER))
+            {
+                rowId = sqldb.insert(TABLE_PLAYER, null, cv);
+            }
+            else if (table_name.equals(TABLE_LEVEL))
+            {
+                rowId = sqldb.insert(TABLE_LEVEL, null, cv);
+            }
+            cv.clear();
         }
         return rowId;
     }
 
-    /*TODO: funktion umbauen zu:
-      public String ausgabe(String table_name, String attribute, int id)
-        table_name bleibt gleich.
-        attribute ist der name des attributes von dem man den wert haben möchte (bsp: NAME oder PW)
-            am besten mit einem switch-case machen und den entsprechenden String zurückgeben (bsp für case name: cursorLevel.getString(1))
-        id ist die PLAYER_ID bzw LEVEL_ID. am besten cursorLevel.moveToPosition(id) benutzen
-        anstelle von mInhalt soll der String als return zurückgegeben werden. (deswegen funtktionstyp von void auf String ändern)
-
-      Cursor cursorLevel und Cursor cursorPlayer sorgen für einen Crash wenn sie auserhalb dieser funktion sind also bitte drinnen lassen
-      PS: du hattest beim erstellen der Tabellen in onCreate() die leerzeichen und ein Komma vor currentLevel in den strings vergessen.
-    */
-    public void ausgabe(String table_name, String mInhalt)
+    public String ausgabe(String table_name, String attribute, int id)
     {
         Cursor cursorLevel = sqldb.query(TABLE_LEVEL, columsLevel, null, null, null, null, null);
         Cursor cursorPlayer = sqldb.query(TABLE_PLAYER, columsPlayer, null, null, null, null, null);
 
         if(table_name.equals(TABLE_LEVEL))
         {
-            while (cursorLevel.moveToNext())
+            cursorLevel.moveToPosition(id);
             {
-                mInhalt += cursorLevel.getString(1) + " " + cursorLevel.getString(2) + " " + cursorLevel.getString(3) + "\n";
+               switch (attribute)
+               {
+                   case CONTENT:
+                       cursorLevel.getString(1);
+                       break;
+                   case TIME:
+                       cursorLevel.getString(2);
+                       break;
+                   case HIGHSCORE:
+                       cursorLevel.getString(3);
+                       break;
+               }
             }
         }
         else if (table_name.equals(TABLE_PLAYER))
         {
-            while (cursorPlayer.moveToNext())
-            {
-                mInhalt += cursorPlayer.getString(1) + " " + cursorPlayer.getString(2) + " " + cursorPlayer.getString(3) + "\n";
+            cursorPlayer.moveToPosition(id);
+
+                switch (attribute)
+                {
+                    case NAME:
+                        cursorPlayer.getString(1);
+                        break;
+                    case PW:
+                        cursorPlayer.getString(2);
+                        break;
+                    case CURRENT:
+                        cursorPlayer.getString(3);
+                        break;
             }
         }
+        return attribute;
     }
 }

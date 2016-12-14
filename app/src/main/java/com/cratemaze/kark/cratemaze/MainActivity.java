@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 
         dbmgr = new DatabaseManager(this);
 
-        dbmgr.insertRecord("level", "content", "111141111100020001100000001100000001100000001100000001100000001100020001111131111" /*false*/); // Level 1
+        dbmgr.insertRecord("level", "content", "111141111100020001100000001100000001100000001100000001100000001100020001111131111", false); // Level 1
         //TODO: Add other Levels (alle mit wait == false)
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
@@ -65,8 +65,8 @@ public class MainActivity extends Activity implements View.OnClickListener
                 break;
 
             case R.id.register:
-                dbmgr.insertRecord("player", "name", username.getText().toString() /*true*/);
-                dbmgr.insertRecord("player", "password", password.getText().toString() /*false*/);
+                dbmgr.insertRecord("player", "name", username.getText().toString(), true);
+                dbmgr.insertRecord("player", "password", password.getText().toString(), false);
                 String msg = "You are registered!";
                 Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
                 break;
