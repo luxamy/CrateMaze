@@ -16,7 +16,10 @@ import java.util.TimerTask;
 
 public class GameActivity extends Activity implements View.OnClickListener
 {
+    private int player1Time;
     private int time;
+    private int mode;
+    private int levelId;
     private boolean startTime;
     private Level level = new Level();
     private final ImageView field[][] = new ImageView[9][9];
@@ -49,6 +52,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         time = 0;
+        player1Time = 0;
         startTime = true;
         initFieldArray();
 
@@ -68,18 +72,24 @@ public class GameActivity extends Activity implements View.OnClickListener
         bLeft.setOnClickListener(this);
 
         Bundle extras = getIntent().getExtras();
-        int id = extras.getInt("id");
-        if (!level.LoadLevel(id))
+        mode = extras.getInt("mode");
+        levelId = extras.getInt("id");
+        if (!level.LoadLevel(levelId))
         {
             Toast.makeText(this, "Couldn't Load Level!", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, new String().valueOf(id), Toast.LENGTH_SHORT).show();
         DrawLevel();
     }
 
     @Override
     public void onClick(View v)
     {
+        if(startTime)
+        {
+            startTime = false;
+            timer.scheduleAtFixedRate(task, new Date(), 1000);
+        }
+
         switch (v.getId())
         {
             case R.id.bDown:
@@ -99,13 +109,6 @@ public class GameActivity extends Activity implements View.OnClickListener
                 break;
         }
         DrawLevel();
-
-        if(startTime)
-        {
-            startTime = false;
-            timer.scheduleAtFixedRate(task, new Date(), 1000);
-        }
-
     }
 
     private void DrawLevel()
@@ -250,11 +253,69 @@ public class GameActivity extends Activity implements View.OnClickListener
         if(level.GetTile(level.getPlayerX() + x, level.getPlayerY() + y) == TILES.EXIT.getVal())
         {
             level.SetPlayer(level.getPlayerX() + x, level.getPlayerY() + y);
+            Finish();
+        }
+    }
+
+    private void Finish()
+    {
+        if(mode == 0)
+        {
             Toast.makeText(this, "You Won!", Toast.LENGTH_SHORT).show();
             Intent data = new Intent();
             data.putExtra("time", time);
             setResult(RESULT_OK, data);
             super.finish();
+        }
+        else if(mode == 1)
+        {
+            if (player1Time == 0)
+            {
+                timer.cancel();
+                timer = new Timer(true);
+                task.cancel();
+                task = new TimerTask() {
+
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                time++;
+                                String sTime = "";
+                                final TextView tvTimer = (TextView) findViewById(R.id.timer);
+                                tvTimer.setText(sTime.valueOf(time));
+                            }
+                        });
+                    }
+                };
+
+                player1Time = time;
+                time = 0;
+                startTime = true;
+                Level player2Level = new Level();
+                if(player2Level.LoadLevel(levelId))
+                {
+                    level = player2Level;
+                    Toast.makeText(this, "Player 2s Turn!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                if(player1Time < time)
+                {
+                    Toast.makeText(this, "Player 1 Won!", Toast.LENGTH_SHORT).show();
+                }
+                else if(player1Time > time)
+                {
+                    Toast.makeText(this, "Player 2 Won!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "DRAW!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }
         }
     }
 }

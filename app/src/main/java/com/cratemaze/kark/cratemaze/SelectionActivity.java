@@ -15,6 +15,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
 
     private int curLevel;
     private int playedLevel;
+    private int mode;
 
     final Button[] bLevels = new Button[levelCount];
 
@@ -26,6 +27,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         Bundle extras = getIntent().getExtras();
+        mode = extras.getInt("mode");
         int playerId = extras.getInt("id");
         //TODO: get currentLevel from player in DB
 
@@ -91,6 +93,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             playedLevel = level;
             Intent i = new Intent(this, GameActivity.class);
             i.putExtra("id", level);
+            i.putExtra("mode", mode);
             startActivityForResult(i, REQUEST_CODE);
         }
     }

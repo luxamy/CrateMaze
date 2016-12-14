@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MenuActivity extends Activity implements View.OnClickListener
 {
@@ -48,6 +49,8 @@ public class MenuActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
+        Intent i = new Intent(this, SelectionActivity.class);
+        boolean start = false;
         switch (view.getId())
         {
             case R.id.highscore:
@@ -56,14 +59,24 @@ public class MenuActivity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.single:
-                Intent i = new Intent(this, SelectionActivity.class);
+                start = true;
                 i.putExtra("id", playerId);
-                startActivityForResult(i, REQUEST_CODE);
+                i.putExtra("mode", 0);
                 break;
             case R.id.twoplayer:
+                start = true;
+                i.putExtra("id", playerId);
+                i.putExtra("mode", 1);
                 break;
             case R.id.wifi:
+                start = true;
+                i.putExtra("id", playerId);
+                i.putExtra("mode", 2);
                 break;
+        }
+        if(start)
+        {
+            startActivityForResult(i, REQUEST_CODE);
         }
     }
 }
