@@ -186,13 +186,13 @@ public class DatabaseManager extends SQLiteOpenHelper
                switch (attribute)
                {
                    case CONTENT:
-                       ret = cursorLevel.getString(1);
+                       ret = cursorLevel.getString(0);
                        break;
                    case TIME:
-                       ret = cursorLevel.getString(2);
+                       ret = cursorLevel.getString(1);
                        break;
                    case HIGHSCORE:
-                       ret = cursorLevel.getString(3);
+                       ret = cursorLevel.getString(2);
                        break;
                }
             }
@@ -204,13 +204,13 @@ public class DatabaseManager extends SQLiteOpenHelper
                 switch (attribute)
                 {
                     case NAME:
-                        ret = cursorPlayer.getString(1);
+                        ret = cursorPlayer.getString(0);
                         break;
                     case PW:
-                        ret =  cursorPlayer.getString(2);
+                        ret =  cursorPlayer.getString(1);
                         break;
                     case CURRENT:
-                        ret = cursorPlayer.getString(3);
+                        ret = cursorPlayer.getString(2);
                         break;
             }
         }

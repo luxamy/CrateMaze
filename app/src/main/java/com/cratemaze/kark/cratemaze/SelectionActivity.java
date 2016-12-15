@@ -105,20 +105,18 @@ public class SelectionActivity extends Activity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
+        onResume();
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE)
         {
-            if(data.hasExtra("time"))
+            if(data.hasExtra("finished"))
             {
                 Bundle b = data.getExtras();
-                if(b.getInt("time") > Integer.valueOf(dbmgr.ausgabe("level", "time", playedLevel)))
+                if(b.getBoolean("finished"))
                 {
-                    dbmgr.updateRecord("level", "time", playedLevel, b.getString("time"));
-                    Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+                    curLevel++;
+                    bLevels[curLevel - 1].setOnClickListener(this);
+                    bLevels[curLevel - 1].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
                 }
-                curLevel++;
-                bLevels[curLevel - 1].setOnClickListener(this);
-                bLevels[curLevel - 1].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
-                Toast.makeText(this, new String().valueOf(data.getExtras().getInt("time")), Toast.LENGTH_SHORT).show();
             }
         }
     }

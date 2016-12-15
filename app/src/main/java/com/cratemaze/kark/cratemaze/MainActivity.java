@@ -58,7 +58,6 @@ public class MainActivity extends Activity implements View.OnClickListener
         {
             case R.id.login:
                 int playerCount = dbmgr.getCount("player");
-                Toast.makeText(this, "Count: " + playerCount, Toast.LENGTH_SHORT).show();
                 String sUsername = username.getText().toString();
                 String sPassword = password.getText().toString();
 

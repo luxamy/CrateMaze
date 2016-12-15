@@ -21,6 +21,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     private int player1Time;
     private int time;
     private int mode;
+    private int levelId;
     private String levelData;
     private boolean startTime;
     private Level level = new Level();
@@ -80,7 +81,7 @@ public class GameActivity extends Activity implements View.OnClickListener
 
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
-        int levelId = extras.getInt("id");
+        levelId = extras.getInt("id");
         levelData = dbmgr.ausgabe("level", "content", levelId);
 
         if (!level.LoadLevel(levelData))
@@ -271,8 +272,24 @@ public class GameActivity extends Activity implements View.OnClickListener
         if(mode == 0)
         {
             Toast.makeText(this, "You Won!", Toast.LENGTH_SHORT).show();
+
+            String currentScore = "" + dbmgr.ausgabe("level", "time", levelId);
+
+            if(!currentScore.equals("null"))
+            {
+                if (time > Integer.valueOf(currentScore)) {
+                    dbmgr.updateRecord("level", "time", levelId, "" + time);
+                    Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                dbmgr.updateRecord("level", "time", levelId, "" + time);
+                Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+            }
+
             Intent data = new Intent();
-            data.putExtra("time", time);
+            data.putExtra("finished", true);
             setResult(RESULT_OK, data);
             super.finish();
         }
@@ -301,6 +318,9 @@ public class GameActivity extends Activity implements View.OnClickListener
 
                 player1Time = time;
                 time = 0;
+                String sTime = "";
+                final TextView tvTimer = (TextView) findViewById(R.id.timer);
+                tvTimer.setText(sTime.valueOf(time));
                 startTime = true;
                 Level player2Level = new Level();
                 if(player2Level.LoadLevel(levelData))
