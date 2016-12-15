@@ -68,4 +68,49 @@
         android:layout_alignBaseline="@+id/bLevel2"
         android:layout_alignBottom="@+id/bLevel2"
         android:layout_toStartOf="@+id/bLevel2" />
+
+    <Button
+        android:text="@string/b6"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel6"
+        android:background="@color/crate_maze_orange"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/bLevel1" />
+
+    <Button
+        android:text="@string/b7"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel7"
+        android:background="@color/crate_maze_orange"
+        android:layout_alignTop="@+id/bLevel6"
+        android:layout_alignStart="@+id/bLevel2" />
+
+    <Button
+        android:text="@string/b8"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel8"
+        android:background="@color/crate_maze_orange"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/bLevel2" />
+
+    <Button
+        android:text="@string/b9"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel9"
+        android:background="@color/crate_maze_orange"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/bLevel4" />
+
+    <Button
+        android:text="@string/b10"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bLevel10"
+        android:background="@color/crate_maze_orange"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/bLevel5" />
 </RelativeLayout>
