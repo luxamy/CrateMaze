@@ -35,6 +35,9 @@ public class MainActivity extends Activity implements View.OnClickListener
         dbmgr.insertRecord("level", "content", "111141111111200011110000211110100011110202011112111011110111211110000011111131111", false); // Level 6
         dbmgr.insertRecord("level", "content", "111141111100200201100011001100201001111020001100002201102111001100202021111131111", false); // Level 7
         dbmgr.insertRecord("level", "content", "111141111100000001101111001101111101120011101100011101101000001111021001111131111", false); // Level 8
+        dbmgr.insertRecord("level", "content", "111141111100100201100022001111000001100111211100002001121212121100000001111131111", false); // Level 9
+        dbmgr.insertRecord("level", "content", "111141111110000011111112011110000011110201011110121011112020211110202011111131111", false); // Level 10
+
 
         final ImageView titel = (ImageView) findViewById(R.id.titel);
 
