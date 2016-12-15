@@ -82,7 +82,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
         levelId = extras.getInt("id");
-        levelData = dbmgr.ausgabe("level", "content", levelId);
+        levelData = dbmgr.ausgabe("level", "content", levelId - 1);
 
         if (!level.LoadLevel(levelData))
         {

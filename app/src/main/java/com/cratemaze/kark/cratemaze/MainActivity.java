@@ -27,6 +27,8 @@ public class MainActivity extends Activity implements View.OnClickListener
 
         dbmgr = new DatabaseManager(this);
 
+        dbmgr.removeRecord("level", -1);
+
         dbmgr.insertRecord("level", "content", "111141111100020001100000001100000001100000001100000001100000001100020001111131111", false); // Level 1
         dbmgr.insertRecord("level", "content", "111141111111101111110002011112020011110222011110000011112020211111101111111131111", false); // Level 2
         dbmgr.insertRecord("level", "content", "111141111100002001100002001111111101110000201102000001101111111100000001111131111", false); // Level 3

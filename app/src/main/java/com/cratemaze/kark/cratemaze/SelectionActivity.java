@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class SelectionActivity extends Activity implements View.OnClickListener
 {
@@ -111,7 +110,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             if(data.hasExtra("finished"))
             {
                 Bundle b = data.getExtras();
-                if(b.getBoolean("finished"))
+                if(b.getBoolean("finished") && curLevel < levelCount)
                 {
                     curLevel++;
                     bLevels[curLevel - 1].setOnClickListener(this);
