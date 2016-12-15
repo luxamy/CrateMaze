@@ -12,7 +12,7 @@ import android.widget.Button;
 public class SelectionActivity extends Activity implements View.OnClickListener
 {
     private static final int REQUEST_CODE = 3;
-    private final int levelCount = 5;
+    private final int levelCount = 10;
 
     private int curLevel;
     private int playedLevel;
@@ -42,6 +42,11 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         bLevels[2] = (Button) findViewById(R.id.bLevel3);
         bLevels[3] = (Button) findViewById(R.id.bLevel4);
         bLevels[4] = (Button) findViewById(R.id.bLevel5);
+        bLevels[5] = (Button) findViewById(R.id.bLevel6);
+        bLevels[6] = (Button) findViewById(R.id.bLevel7);
+        bLevels[7] = (Button) findViewById(R.id.bLevel8);
+        bLevels[8] = (Button) findViewById(R.id.bLevel9);
+        bLevels[9] = (Button) findViewById(R.id.bLevel10);
 
         final Button bBack = (Button) findViewById(R.id.bBack);
 
@@ -84,6 +89,21 @@ public class SelectionActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.bLevel5:
                 if (curLevel == 5) level = 5;
+                break;
+            case R.id.bLevel6:
+                if (curLevel == 6) level = 6;
+                break;
+            case R.id.bLevel7:
+                if (curLevel == 7) level = 7;
+                break;
+            case R.id.bLevel8:
+                if (curLevel == 8) level = 8;
+                break;
+            case R.id.bLevel9:
+                if (curLevel == 9) level = 9;
+                break;
+            case R.id.bLevel10:
+                if (curLevel == 10) level = 10;
                 break;
             case R.id.bBack:
                 finish();
