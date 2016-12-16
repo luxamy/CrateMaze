@@ -77,7 +77,7 @@ public class DatabaseManager extends SQLiteOpenHelper
 
         try
         {
-            sqlstm = sqldb.compileStatement("UPDATE " + table_name + " SET " + attribute + " = " + newValue + "WHERE _id=" + id + ";");
+            sqlstm = sqldb.compileStatement("UPDATE " + table_name + " SET " + attribute + " = " + newValue + " WHERE _id=" + id + ";");
             sqlstm.execute();
         }
         catch (SQLiteException ex)

@@ -22,6 +22,8 @@ public class GameActivity extends Activity implements View.OnClickListener
     private int time;
     private int mode;
     private int levelId;
+    private int curLevel;
+    private int playerId;
     private String levelData;
     private boolean startTime;
     private Level level = new Level();
@@ -81,6 +83,8 @@ public class GameActivity extends Activity implements View.OnClickListener
 
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
+        playerId = extras.getInt("playerId");
+        curLevel = extras.getInt("curLevel");
         levelId = extras.getInt("id");
         levelData = dbmgr.ausgabe("level", "content", levelId - 1);
 
@@ -286,6 +290,13 @@ public class GameActivity extends Activity implements View.OnClickListener
             {
                 dbmgr.updateRecord("level", "time", levelId, "" + time);
                 Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+            }
+
+            if(levelId == curLevel)
+            {
+                curLevel++;
+                dbmgr.updateRecord("player", "currentLevel", playerId, "" + curLevel);
+                curLevel = Integer.valueOf(dbmgr.ausgabe("player", "currentLevel", playerId));
             }
 
             Intent data = new Intent();

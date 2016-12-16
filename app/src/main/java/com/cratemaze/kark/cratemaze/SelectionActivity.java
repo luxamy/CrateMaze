@@ -17,6 +17,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
     private int curLevel;
     private int playedLevel;
     private int mode;
+    private int playerId;
 
     private DatabaseManager dbmgr;
     private SQLiteDatabase sqldb;
@@ -32,7 +33,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
 
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
-        int playerId = extras.getInt("id");
+        playerId = extras.getInt("id");
 
         dbmgr = new DatabaseManager(this);
         curLevel = Integer.valueOf(dbmgr.ausgabe("player", "currentLevel", playerId));
@@ -117,6 +118,8 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             Intent i = new Intent(this, GameActivity.class);
             i.putExtra("id", level);
             i.putExtra("mode", mode);
+            i.putExtra("curLevel", curLevel);
+            i.putExtra("playerId", playerId);
             startActivityForResult(i, REQUEST_CODE);
         }
     }
