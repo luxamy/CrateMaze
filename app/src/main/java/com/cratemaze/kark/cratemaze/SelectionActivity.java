@@ -130,7 +130,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             if(data.hasExtra("finished"))
             {
                 Bundle b = data.getExtras();
-                if(b.getBoolean("finished") && curLevel < levelCount)
+                if(b.getBoolean("finished") && curLevel < levelCount && playedLevel == curLevel)
                 {
                     curLevel++;
                     bLevels[curLevel - 1].setOnClickListener(this);
