@@ -343,7 +343,11 @@ public class GameActivity extends Activity implements View.OnClickListener
                 {
                     Toast.makeText(this, "DRAW!", Toast.LENGTH_SHORT).show();
                 }
-                finish();
+
+                Intent data = new Intent();
+                data.putExtra("finished", true);
+                setResult(RESULT_OK, data);
+                super.finish();
             }
         }
     }
