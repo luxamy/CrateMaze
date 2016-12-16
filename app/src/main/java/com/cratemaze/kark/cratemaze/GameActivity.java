@@ -273,7 +273,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         {
             Toast.makeText(this, "You Won!", Toast.LENGTH_SHORT).show();
 
-            String currentScore = "" + dbmgr.ausgabe("level", "time", levelId);
+            String currentScore = "" + dbmgr.ausgabe("level", "time", levelId - 1);
 
             if(!currentScore.equals("null"))
             {

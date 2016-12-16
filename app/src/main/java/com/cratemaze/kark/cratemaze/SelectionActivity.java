@@ -76,34 +76,34 @@ public class SelectionActivity extends Activity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.bLevel1:
-                if (curLevel == 1) level = 1;
+                if (curLevel >= 1) level = 1;
                 break;
             case R.id.bLevel2:
-                if (curLevel == 2) level = 2;
+                if (curLevel >= 2) level = 2;
                 break;
             case R.id.bLevel3:
-                if (curLevel == 3) level = 3;
+                if (curLevel >= 3) level = 3;
                 break;
             case R.id.bLevel4:
-                if (curLevel == 4) level = 4;
+                if (curLevel >= 4) level = 4;
                 break;
             case R.id.bLevel5:
-                if (curLevel == 5) level = 5;
+                if (curLevel >= 5) level = 5;
                 break;
             case R.id.bLevel6:
-                if (curLevel == 6) level = 6;
+                if (curLevel >= 6) level = 6;
                 break;
             case R.id.bLevel7:
-                if (curLevel == 7) level = 7;
+                if (curLevel >= 7) level = 7;
                 break;
             case R.id.bLevel8:
-                if (curLevel == 8) level = 8;
+                if (curLevel >= 8) level = 8;
                 break;
             case R.id.bLevel9:
-                if (curLevel == 9) level = 9;
+                if (curLevel >= 9) level = 9;
                 break;
             case R.id.bLevel10:
-                if (curLevel == 10) level = 10;
+                if (curLevel >= 10) level = 10;
                 break;
             case R.id.bBack:
                 finish();
