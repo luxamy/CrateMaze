@@ -256,14 +256,14 @@ public class GameActivity extends Activity implements View.OnClickListener
             level.UpdateLevel(level.getPlayerX() + x, level.getPlayerY() + y, TILES.EMPTY.getVal());
             level.UpdateLevel(level.getPlayerX() + x + x, level.getPlayerY() + y + y, TILES.BOX.getVal());
         }
-        if(level.GetTile(level.getPlayerX() + x, level.getPlayerY() + y) == TILES.EMPTY.getVal())
-        {
-            level.SetPlayer(level.getPlayerX() + x, level.getPlayerY() + y);
-        }
         if(level.GetTile(level.getPlayerX() + x, level.getPlayerY() + y) == TILES.EXIT.getVal())
         {
             level.SetPlayer(level.getPlayerX() + x, level.getPlayerY() + y);
             Finish();
+        }
+        if(level.GetTile(level.getPlayerX() + x, level.getPlayerY() + y) == TILES.EMPTY.getVal())
+        {
+            level.SetPlayer(level.getPlayerX() + x, level.getPlayerY() + y);
         }
     }
 
