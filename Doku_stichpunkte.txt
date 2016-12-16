@@ -1,0 +1,11 @@
+Probleme:
+
+Absturz bei Abfrage im Außenbereich (außerhalb festgelegtes Spielfeld)
+
+
+
+Pfeilhintergrund (Button war automatisch grau)
+-> transparenter Hintergrund eingestellt unter "Background"
+
+
+Level wird neu gestartet, wenn Bildschirm gedreht wird
