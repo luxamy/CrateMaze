@@ -143,10 +143,9 @@
         app:srcCompat="@mipmap/direction"
         android:id="@+id/bDown"
         android:rotation="180"
-        android:layout_alignBottom="@+id/field5x9"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:background="@android:drawable/list_selector_background" />
+        android:background="@android:drawable/list_selector_background"
+        android:layout_alignTop="@+id/test"
+        android:layout_alignStart="@+id/bRight" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -154,10 +153,10 @@
         app:srcCompat="@mipmap/direction"
         android:id="@+id/bRight"
         android:rotation="90"
-        android:layout_alignBottom="@+id/field5x9"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="28dp"
-        android:background="@android:drawable/list_selector_background" />
+        android:layout_marginEnd="35dp"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_above="@+id/field9x9"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -694,9 +693,8 @@
         android:id="@+id/bLeft"
         android:rotation="270"
         android:background="@android:drawable/list_selector_background"
-        android:layout_above="@+id/field9x8"
-        android:layout_alignStart="@+id/bRight"
-        android:layout_marginBottom="15dp" />
+        android:layout_above="@+id/field1x9"
+        android:layout_alignStart="@+id/bUp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -705,8 +703,9 @@
         android:id="@+id/bUp"
         tools:srcCompat="@mipmap/direction"
         android:background="@android:drawable/list_selector_background"
-        android:layout_alignTop="@+id/bLeft"
-        android:layout_alignStart="@+id/bDown" />
+        android:layout_marginStart="27dp"
+        android:layout_alignTop="@+id/test"
+        android:layout_toEndOf="@+id/timer" />
 
     <TextView
         android:text="@string/timer"
@@ -715,4 +714,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@+id/timer" />
+
+    <Button
+        android:text="@string/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bBack"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/background_floating_material_light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
