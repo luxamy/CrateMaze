@@ -70,35 +70,13 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqldb = getWritableDatabase();
     }
 
-    public boolean updateRecord(String table_name, String attribute, int id, String newValue)
+    public int updateRecord(String table_name, String attribute, int id, String newValue)
     {
-        SQLiteStatement sqlstm = null;
-        boolean successCheck = true;
-
-        try
-        {
-            sqlstm = sqldb.compileStatement("UPDATE " + table_name + " SET " + attribute + " = " + newValue + " WHERE _id=" + id + ";");
-            sqlstm.execute();
-        }
-        catch (SQLiteException ex)
-        {
-            ex.printStackTrace();
-            successCheck = false;
-        }
-        finally
-        {
-            try
-            {
-                sqlstm.close();
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-                successCheck = false;
-            }
-        }
-
-        return successCheck;
+        String args[] = new String[1];
+        ContentValues values = new ContentValues();
+        args[0] = "" + id;
+        values.put(attribute, newValue);
+        return sqldb.update(table_name, values, "_id=?", args);
     }
 
     public long insertRecord(String table_name, String key, String value, boolean wait)
