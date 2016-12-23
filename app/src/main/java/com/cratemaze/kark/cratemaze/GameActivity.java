@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         final ImageButton bUp = (ImageButton) findViewById(R.id.bUp);
         final ImageButton bRight = (ImageButton) findViewById(R.id.bRight);
         final ImageButton bLeft = (ImageButton) findViewById(R.id.bLeft);
+        final Button bBack = (Button) findViewById(R.id.bBack);
 
         bDown.setImageResource(R.mipmap.direction);
         bUp.setImageResource(R.mipmap.direction);
@@ -80,6 +82,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         bUp.setOnClickListener(this);
         bRight.setOnClickListener(this);
         bLeft.setOnClickListener(this);
+        bBack.setOnClickListener(this);
 
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
@@ -120,6 +123,9 @@ public class GameActivity extends Activity implements View.OnClickListener
 
             case R.id.bLeft:
                 Move(0, -1);
+                break;
+            case R.id.bBack:
+                finish();
                 break;
         }
         DrawLevel();
@@ -289,7 +295,7 @@ public class GameActivity extends Activity implements View.OnClickListener
             else
             {
                 dbmgr.updateRecord("level", "time", levelId, "" + time);
-                Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No new Highscore", Toast.LENGTH_SHORT).show();
             }
 
             if(levelId == curLevel)

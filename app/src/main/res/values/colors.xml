@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="crate_maze_orange">#FFFF8800</color>
+    <color name="crate_maze_gray">#FFBEBEBE</color>
 </resources>
