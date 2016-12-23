@@ -118,8 +118,6 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             Intent i = new Intent(this, GameActivity.class);
             i.putExtra("id", level);
             i.putExtra("mode", mode);
-            i.putExtra("curLevel", curLevel);
-            i.putExtra("playerId", playerId);
             startActivityForResult(i, REQUEST_CODE);
         }
     }
@@ -136,6 +134,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
                 if(b.getBoolean("finished") && curLevel < levelCount && playedLevel == curLevel)
                 {
                     curLevel++;
+                    dbmgr.updateRecord("player", "currentLevel", playerId, "" + curLevel);
                     bLevels[curLevel - 1].setOnClickListener(this);
                     bLevels[curLevel - 1].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
                 }
@@ -154,6 +153,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
     protected void onResume()
     {
         super.onResume();
+        dbmgr = new DatabaseManager(this);
         sqldb = dbmgr.getReadableDatabase();
 
         Cursor levelCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_LEVEL, null);

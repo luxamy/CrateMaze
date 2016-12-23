@@ -113,6 +113,7 @@ public class MainActivity extends Activity implements View.OnClickListener
     protected void onResume()
     {
         super.onResume();
+        dbmgr = new DatabaseManager(this);
         sqldb = dbmgr.getReadableDatabase();
 
         Cursor levelCursor = sqldb.rawQuery(DatabaseManager.CLASS_SELECT_RAW_LEVEL, null);
