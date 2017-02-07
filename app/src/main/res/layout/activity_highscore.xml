@@ -8,7 +8,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/highscore"
         android:id="@+id/titel"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />

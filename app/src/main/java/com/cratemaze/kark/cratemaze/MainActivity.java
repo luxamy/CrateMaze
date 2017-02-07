@@ -82,14 +82,23 @@ public class MainActivity extends Activity implements View.OnClickListener
                             i.putExtra("id", n);
                             startActivityForResult(i, REQUEST_CODE);
                         }
+                        else
+                        {
+                            Toast.makeText(this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
+                        }
                         break;
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Incorrect Username!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 break;
 
             case R.id.exit:
-                dbmgr.removeRecord("player", -1);
+                dbmgr.removeRecord("player", "");
+                dbmgr.removeRecord("sqlite_sequence", "name='player'");
                 finish();
                 break;
 

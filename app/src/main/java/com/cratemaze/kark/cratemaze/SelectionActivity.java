@@ -134,7 +134,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
                 if(b.getBoolean("finished") && curLevel < levelCount && playedLevel == curLevel)
                 {
                     curLevel++;
-                    dbmgr.updateRecord("player", "currentLevel", playerId, "" + curLevel);
+                    dbmgr.updateRecord("player", "currentLevel", playerId + 1, "" + curLevel);
                     bLevels[curLevel - 1].setOnClickListener(this);
                     bLevels[curLevel - 1].setBackgroundColor(getResources().getColor(R.color.crate_maze_orange));
                 }

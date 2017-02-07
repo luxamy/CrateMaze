@@ -72,11 +72,10 @@ public class DatabaseManager extends SQLiteOpenHelper
 
     public int updateRecord(String table_name, String attribute, int id, String newValue)
     {
-        String args[] = new String[1];
+        String filter = "_id=" + id;
         ContentValues values = new ContentValues();
-        args[0] = "" + id;
         values.put(attribute, newValue);
-        return sqldb.update(table_name, values, "_id=?", args);
+        return sqldb.update(table_name, values, filter, null);
     }
 
     public long insertRecord(String table_name, String key, String value, boolean wait)
@@ -100,10 +99,11 @@ public class DatabaseManager extends SQLiteOpenHelper
         return rowId;
     }
 
-    public boolean removeRecord(String table_name, int id)
+    public boolean removeRecord(String table_name, String filter)
     {
         String cmd = "DELETE FROM " + table_name;
-        if(id >= 0) cmd += " WHERE _id=" + id + ";";
+        if(filter.length() > 0) cmd += " WHERE " + filter;
+        cmd += ";";
 
         SQLiteStatement sqlstm = null;
         boolean successCheck = true;
