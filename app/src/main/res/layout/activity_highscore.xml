@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/crate_maze_white">
+    android:background="@color/crate_maze_white"
+    tools:id="@id/bBackScore">
 
     <ImageView
         android:layout_width="match_parent"
@@ -11,5 +13,252 @@
         android:id="@+id/titel"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/b_highscore_back"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/crate_maze_white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/b_highscore_back"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/fScore5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/fScore5"
+        android:id="@+id/fScore4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fScore3"
+        android:layout_alignStart="@+id/fScore3"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/fScore2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:id="@+id/fScore3"
+        android:layout_above="@+id/fScore4"
+        android:layout_alignStart="@+id/fScore4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fScore2"
+        android:layout_alignStart="@+id/fScore2"
+        android:layout_marginBottom="22dp"
+        android:id="@+id/fScore1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fScore1.1"
+        android:layout_alignBaseline="@+id/fScore1"
+        android:layout_alignBottom="@+id/fScore1"
+        android:layout_alignRight="@+id/fScore1"
+        android:layout_marginRight="-120dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore2"
+        android:layout_alignStart="@+id/fScore1.1"
+        android:id="@+id/fScore2.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore3"
+        android:layout_alignStart="@+id/fScore2.1"
+        android:id="@+id/fScore3.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore4"
+        android:layout_alignStart="@+id/fScore3.1"
+        android:id="@+id/fScore4.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore5"
+        android:layout_alignStart="@+id/fScore4.1"
+        android:id="@+id/fScore5.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/b_highscore_back"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="420dp"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/fScore10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/fScore10"
+        android:id="@+id/fScore9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fScore8"
+        android:layout_alignStart="@+id/fScore8"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/fScore7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:id="@+id/fScore8"
+        android:layout_above="@+id/fScore9"
+        android:layout_alignStart="@+id/fScore9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fScore2"
+        android:layout_alignStart="@+id/fScore7"
+        android:layout_marginBottom="22dp"
+        android:id="@+id/fScore6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fScore6.1"
+        android:layout_alignBaseline="@+id/fScore6"
+        android:layout_alignBottom="@+id/fScore6"
+        android:layout_alignRight="@+id/fScore6"
+        android:layout_marginRight="-120dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore7"
+        android:layout_alignStart="@+id/fScore6.1"
+        android:id="@+id/fScore7.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore8"
+        android:layout_alignStart="@+id/fScore7.1"
+        android:id="@+id/fScore8.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore9"
+        android:layout_alignStart="@+id/fScore8.1"
+        android:id="@+id/fScore9.1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fScore10"
+        android:layout_alignStart="@+id/fScore9.1"
+        android:id="@+id/fScore10.1" />
+
+    <TextView
+        android:text="@string/Level1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fScore1"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView14" />
+
+    <TextView
+        android:text="@string/Level2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fScore1"
+        android:layout_alignEnd="@+id/textView14"
+        android:id="@+id/textView15" />
+
+    <TextView
+        android:text="@string/Level3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fScore2"
+        android:layout_alignEnd="@+id/textView15"
+        android:id="@+id/textView16" />
+
+    <TextView
+        android:text="@string/Level4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fScore3"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView17" />
+
+    <TextView
+        android:text="@string/Level5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fScore5"
+        android:layout_alignEnd="@+id/textView17"
+        android:id="@+id/textView18" />
+
+    <TextView
+        android:text="@string/Level6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fScore6"
+        android:layout_alignStart="@+id/b_highscore_back"
+        android:layout_marginStart="47dp"
+        android:id="@+id/textView19" />
+
+    <TextView
+        android:text="@string/Level7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fScore6"
+        android:layout_alignStart="@+id/textView19"
+        android:id="@+id/textView20" />
+
+    <TextView
+        android:text="@string/Level8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fScore3.1"
+        android:layout_alignStart="@+id/textView20"
+        android:id="@+id/textView21" />
+
+    <TextView
+        android:text="@string/Level9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fScore8"
+        android:layout_alignStart="@+id/textView21"
+        android:id="@+id/textView22" />
+
+    <TextView
+        android:text="@string/Level10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView23"
+        android:layout_alignBaseline="@+id/fScore5.1"
+        android:layout_alignBottom="@+id/fScore5.1"
+        android:layout_alignStart="@+id/textView22" />
 
 </RelativeLayout>

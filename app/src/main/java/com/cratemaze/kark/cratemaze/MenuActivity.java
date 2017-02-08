@@ -54,6 +54,8 @@ public class MenuActivity extends Activity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.highscore:
+                Intent h = new Intent(this, HighscoreActivity.class);
+                startActivity(h);
                 break;
             case R.id.logout:
                 finish();
@@ -69,7 +71,7 @@ public class MenuActivity extends Activity implements View.OnClickListener
                 i.putExtra("mode", 1);
                 break;
             case R.id.wifi:
-                start = true;
+                Toast.makeText(this, "Sorry but this feature is not yet available", Toast.LENGTH_SHORT).show();
                 i.putExtra("id", playerId);
                 i.putExtra("mode", 2);
                 break;

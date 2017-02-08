@@ -65,6 +65,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.login:
+                int login = 0;
                 int playerCount = dbmgr.getCount("player");
                 String sUsername = username.getText().toString();
                 String sPassword = password.getText().toString();
@@ -72,28 +73,30 @@ public class MainActivity extends Activity implements View.OnClickListener
                 int n;
                 for(n = 0; n < playerCount; n++)
                 {
+                    login = 0;
                     String dbUsername = dbmgr.ausgabe("player", "name", n);
                     String dbPassword = dbmgr.ausgabe("player", "password", n);
                     if(dbUsername.equals(sUsername))
                     {
+                        login = 1;
                         if(dbPassword.equals(sPassword))
                         {
                             Intent i = new Intent(this, MenuActivity.class);
                             i.putExtra("id", n);
                             startActivityForResult(i, REQUEST_CODE);
-                        }
-                        else
-                        {
-                            Toast.makeText(this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
+                            login = 2;
                         }
                         break;
                     }
-                    else
-                    {
-                        Toast.makeText(this, "Incorrect Username!", Toast.LENGTH_SHORT).show();
-                    }
                 }
-
+                if(login == 0)
+                {
+                    Toast.makeText(this, "Incorrect Username!", Toast.LENGTH_SHORT).show();
+                }
+                else if(login == 1)
+                {
+                    Toast.makeText(this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.exit:
