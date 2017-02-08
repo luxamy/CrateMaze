@@ -101,7 +101,9 @@ public class MainActivity extends Activity implements View.OnClickListener
 
             case R.id.exit:
                 dbmgr.removeRecord("player", "");
+                dbmgr.removeRecord("level", "");
                 dbmgr.removeRecord("sqlite_sequence", "name='player'");
+                dbmgr.removeRecord("sqlite_sequence", "name='level'");
                 finish();
                 break;
 

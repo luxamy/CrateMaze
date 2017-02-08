@@ -55,7 +55,7 @@ public class MenuActivity extends Activity implements View.OnClickListener
         {
             case R.id.highscore:
                 Intent h = new Intent(this, HighscoreActivity.class);
-                startActivity(h);
+                this.startActivity(h);
                 break;
             case R.id.logout:
                 finish();

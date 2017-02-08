@@ -20,6 +20,8 @@ public class HighscoreActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_highscore);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        dbmgr = new DatabaseManager(this);
+
         final TextView level1  = (TextView) findViewById(R.id.fScore1);
         final TextView level2  = (TextView) findViewById(R.id.fScore2);
         final TextView level3  = (TextView) findViewById(R.id.fScore3);
@@ -42,35 +44,35 @@ public class HighscoreActivity extends Activity implements View.OnClickListener
         final TextView level9score  = (TextView) findViewById(R.id.fScore9_1);
         final TextView level10score = (TextView) findViewById(R.id.fScore10_1);
 
-        level1.setText(dbmgr.ausgabe("level", "highscore", 1));
-        level1score.setText(dbmgr.ausgabe("level", "time", 1));
+        level1.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 0)) - 1));
+        level1score.setText(dbmgr.ausgabe("level", "time", 0));
 
-        level2.setText(dbmgr.ausgabe("level", "highscore", 2));
-        level2score.setText(dbmgr.ausgabe("level", "time", 2));
+        level2.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 1)) - 1));
+        level2score.setText(dbmgr.ausgabe("level", "time", 1));
 
-        level3.setText(dbmgr.ausgabe("level", "highscore", 3));
-        level3score.setText(dbmgr.ausgabe("level", "time", 3));
+        level3.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 2)) - 1));
+        level3score.setText(dbmgr.ausgabe("level", "time", 2));
 
-        level4.setText(dbmgr.ausgabe("level", "highscore", 4));
-        level4score.setText(dbmgr.ausgabe("level", "time", 4));
+        level4.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 3)) - 1));
+        level4score.setText(dbmgr.ausgabe("level", "time", 3));
 
-        level5.setText(dbmgr.ausgabe("level", "highscore", 5));
-        level5score.setText(dbmgr.ausgabe("level", "time", 5));
+        level5.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 4)) - 1));
+        level5score.setText(dbmgr.ausgabe("level", "time", 4));
 
-        level6.setText(dbmgr.ausgabe("level", "highscore", 6));
-        level6score.setText(dbmgr.ausgabe("level", "time", 6));
+        level6.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 5)) - 1));
+        level6score.setText(dbmgr.ausgabe("level", "time", 5));
 
-        level7.setText(dbmgr.ausgabe("level", "highscore", 7));
-        level7score.setText(dbmgr.ausgabe("level", "time", 7));
+        level7.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 6)) - 1));
+        level7score.setText(dbmgr.ausgabe("level", "time", 6));
 
-        level8.setText(dbmgr.ausgabe("level", "highscore", 8));
-        level8score.setText(dbmgr.ausgabe("level", "time", 8));
+        level8.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 7)) - 1));
+        level8score.setText(dbmgr.ausgabe("level", "time", 7));
 
-        level9.setText(dbmgr.ausgabe("level", "highscore", 9));
-        level9score.setText(dbmgr.ausgabe("level", "time", 9));
+        level9.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 8)) - 1));
+        level9score.setText(dbmgr.ausgabe("level", "time", 8));
 
-        level10.setText(dbmgr.ausgabe("level", "highscore", 10));
-        level10score.setText(dbmgr.ausgabe("level", "time", 10));
+        level10.setText(dbmgr.ausgabe("player", "name", Integer.parseInt(dbmgr.ausgabe("level", "highscore", 9)) - 1));
+        level10score.setText(dbmgr.ausgabe("level", "time", 9));
 
         final Button bBack = (Button) findViewById(R.id.b_highscore_back);
 

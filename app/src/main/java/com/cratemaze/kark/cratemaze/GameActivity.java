@@ -281,17 +281,21 @@ public class GameActivity extends Activity implements View.OnClickListener
 
             String currentScore = "" + dbmgr.ausgabe("level", "time", levelId - 1);
 
+            //if the database entry is not empty, check if the new score is better, else just add it.
             if(!currentScore.equals("null"))
             {
-                if (time > Integer.valueOf(currentScore)) {
+                if (time > Integer.valueOf(currentScore))
+                {
                     dbmgr.updateRecord("level", "time", levelId, "" + time);
+                    dbmgr.updateRecord("level", "highscore", levelId, "1");     //TODO: @rk add player_id instead of "1"
                     Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
                 dbmgr.updateRecord("level", "time", levelId, "" + time);
-                Toast.makeText(this, "No new Highscore", Toast.LENGTH_SHORT).show();
+                dbmgr.updateRecord("level", "highscore", levelId, "1");         //TODO: @rk add player_id instead of "1"
+                Toast.makeText(this, "New Highscore", Toast.LENGTH_SHORT).show();
             }
 
             Intent data = new Intent();
