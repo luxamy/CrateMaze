@@ -49,15 +49,15 @@ public class HighscoreActivity extends Activity implements View.OnClickListener
         score[8] = (TextView) findViewById(R.id.fScore9_1);
         score[9] = (TextView) findViewById(R.id.fScore10_1);
 
-        for(int i = 0; i <= dbmgr.getCount("level"); i++)
+        for(int i = 0; i < dbmgr.getCount("level"); i++)
         {
             String playerid = dbmgr.ausgabe("level", "highscore", i);
-            if(playerid.equals("null"))
+            if(playerid == null)
                 continue;
 
             int tmp = Integer.parseInt(playerid) - 1;
             player[i].setText(dbmgr.ausgabe("player", "name", tmp));
-            score[i].setText(dbmgr.ausgabe("level", "time", i));
+            score[i].setText(dbmgr.ausgabe("level", "time", i) + " sec.");
         }
 
         bBack.setOnClickListener(this);

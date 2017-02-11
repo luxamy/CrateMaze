@@ -23,6 +23,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     private int time;
     private int mode;
     private int levelId;
+    private int playerid;
     private String levelData;
     private boolean startTime;
     private Level level = new Level();
@@ -85,6 +86,7 @@ public class GameActivity extends Activity implements View.OnClickListener
         Bundle extras = getIntent().getExtras();
         mode = extras.getInt("mode");
         levelId = extras.getInt("id");
+        playerid = extras.getInt("playerid");
         levelData = dbmgr.ausgabe("level", "content", levelId - 1);
 
         if (!level.LoadLevel(levelData))
@@ -279,22 +281,22 @@ public class GameActivity extends Activity implements View.OnClickListener
         {
             Toast.makeText(this, "You Won!", Toast.LENGTH_SHORT).show();
 
-            String currentScore = "" + dbmgr.ausgabe("level", "time", levelId - 1);
+            String currentScore = dbmgr.ausgabe("level", "time", levelId - 1);
 
             //if the database entry is not empty, check if the new score is better, else just add it.
-            if(!currentScore.equals("null"))
+            if(currentScore != null)
             {
-                if (time > Integer.valueOf(currentScore))
+                if (time < Integer.valueOf(currentScore))
                 {
                     dbmgr.updateRecord("level", "time", levelId, "" + time);
-                    dbmgr.updateRecord("level", "highscore", levelId, "1");     //TODO: @rk add player_id instead of "1"
+                    dbmgr.updateRecord("level", "highscore", levelId, "" + playerid);
                     Toast.makeText(this, "New Highscore!", Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
                 dbmgr.updateRecord("level", "time", levelId, "" + time);
-                dbmgr.updateRecord("level", "highscore", levelId, "1");         //TODO: @rk add player_id instead of "1"
+                dbmgr.updateRecord("level", "highscore", levelId, "" + playerid);
                 Toast.makeText(this, "New Highscore", Toast.LENGTH_SHORT).show();
             }
 

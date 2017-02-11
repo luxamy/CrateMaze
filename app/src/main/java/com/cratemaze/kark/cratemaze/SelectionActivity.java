@@ -117,6 +117,7 @@ public class SelectionActivity extends Activity implements View.OnClickListener
             playedLevel = level;
             Intent i = new Intent(this, GameActivity.class);
             i.putExtra("id", level);
+            i.putExtra("playerid", playerId + 1);
             i.putExtra("mode", mode);
             startActivityForResult(i, REQUEST_CODE);
         }
